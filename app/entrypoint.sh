@@ -28,7 +28,8 @@ case $1 in
       -nomouse -nosound \
       -window -geometry 320x240 \
       -config /app/chocolate-doom.cfg \
-      -connect server -nodes 3 &
+      -deathmatch -nomonsters \
+      -connect server -nodes 4 &
     doom_pid=$!
   ;;
 esac

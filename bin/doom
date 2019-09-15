@@ -32,14 +32,10 @@ case "$1" in
       sleep 0.1
     done
   ;;
-  start)
-    doc bg
-    doc scale client 4
-    $0 open
-  ;;
   open)
     killall "Screen Sharing" || true
-    for i in `seq 1 4`; do
+    clients=$(docker-compose ps -q client | wc -l | tr -d ' ')
+    for i in `seq 1 $clients`; do
       open vnc://jepjep:secret@$(doc port client 5900 $i) &
     done
   ;;
