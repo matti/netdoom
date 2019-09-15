@@ -10,6 +10,6 @@ services:
     build: .
     volumes:
       - ./app:/app
-    command: -nosound -window -geometry 320x240 -connect server
+    command: -nosound -window -geometry 320x240 -connect server -nodes 4
     ports:
       - 5900
