@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+_term() {
+  >&2 echo "TERM"
+  exit 0
+}
+trap "_term" TERM
+
+_err() {
+  >&2 echo "err: $*"
+  exit 1
+}
+
+_int() {
+  echo "
+INT"
+  sleep 0.1
+}
+
+case "$1" in
+  dev)
+    trap _int INT
+    while true; do
+      doc bg
+      doc scale client 4
+      $0 open
+
+      set +e
+        doc tail
+      set -e
+      sleep 0.1
+    done
+  ;;
+  start)
+    doc bg
+    doc scale client 4
+    $0 open
+  ;;
+  open)
+    killall "Screen Sharing" || true
+    for i in `seq 1 4`; do
+      open vnc://jepjep:secret@$(doc port client 5900 $i) &
+    done
+  ;;
+esac

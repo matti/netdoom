@@ -5,11 +5,11 @@ services:
     build: .
     volumes:
       - ./app:/app
-    command: -dedicated
+    command: server
   client:
     build: .
     volumes:
       - ./app:/app
-    command: -nosound -window -geometry 320x240 -connect server -nodes 4
+    command: client
     ports:
       - 5900
