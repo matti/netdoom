@@ -1,0 +1,15 @@
+version: "3.6"
+
+services:
+  server:
+    build: .
+    volumes:
+      - ./app:/app
+    command: -dedicated
+  client:
+    build: .
+    volumes:
+      - ./app:/app
+    command: -nosound -window -geometry 320x240 -connect server
+    ports:
+      - 5900
